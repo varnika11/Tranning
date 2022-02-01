@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> university </title>
+</head>
+<body>
+    <h1 style="color: white; font-size: 40px; text-align: center;">UNIVERSITIES</h1>
+    <h3 style="color: white; font-size: 30px; ">let's search here for best university </h3>
+    <input type="text" id="btn" name="click">
+    <button onclick="submithandler(document.getElementById('btn').value)">submit</button>
+    <div id="news">
+
+    </div>
+   
+     <script>        
+        
+        let displayNews = (news) => {
+            let output = '';
+            for(i=0;i<news.length;i++){
+                output += `<div class='article'><h3>${news[i].country}</h3>
+                    <p>${news[i].name}</p>
+                    <p>${news[i].alpha_two_code}</p>
+                    <p>${news[i]['state-province']}</p>
+                    <a href=${news[i]['web_pages']}>${news[i]['web_pages']}</a>
+                    
+                    </div>`;
+            }
+            document.getElementById('news').innerHTML = output;
+
+        }
+
+        
+        const submithandler=(a) => fetch(`http://universities.hipolabs.com/search?country=${a}`)
+        .then(res => res.json())
+        .then(res => displayNews(res));
+    </script>
+    <style>
+        body{
+            background-color: coral;
+        }
+        .article{
+            width:400px;
+            background-color: rgb(255, 255, 255);
+            border: 1px solid black;
+            padding:16px;
+            margin:10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 2px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .article img{
+            width: 380px;;
+        }
+        
+    </style>
+</body>
+</html>
