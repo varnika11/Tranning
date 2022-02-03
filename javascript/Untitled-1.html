@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> js functions </title>
+</head>
+<body>
+    <script>
+        let employee = [
+            {name:"hari", mobile:"8679383034", email:"hari@gmail.com", age:"30", empid:"1254"},
+            {name:"rahul", mobile:"7489363893", email:"rahul@gmail.com", age:"24", empid:"5210"},
+            {name:"ravi", mobile:"846493806", email:"ravi@gmail.com", age:"30", empid:"3250"},
+            {name:"lavanya", mobile:"8996250145", email:"lavanya@gmail.com", age:"28",empid:"5466"},
+    ];
+        //  for each
+        //  for(let i=0;i<employee.length;i++){
+        //      console.log(employee[i]);
+        //  }
+    //     employee.forEach(function(employee){
+    //          console.log(employee);
+    //    })
+
+    //    employee.forEach(
+    //         (employee) => console.log(`${employee.name} is ${employee.age} years old`)
+    //         );
+
+            // employee.forEach(
+            //  (employee) => console.log(`${employee.name} employee id  is  ${employee.empid}`)
+            //  );
+
+
+        //      for(let i=0;i<employee.length;i++){
+        //         if(employee[i].age<30)
+        //     {
+        //        console.log(employee[i])
+        //     }
+        // }
+           // fliter
+        // let filteredemployee = employee.filter(function(employee){
+        //      if(employee.age<30) return true;
+        //      if(employee.age>20) return false;
+        // });
+
+           let filteredemployee = employee.filter(employee => employee.age<30)
+            console.log(filteredemployee);
+
+        // let filteredemployee = employee.filter(employee => employee.age<=30)
+        // console.log(filteredemployee);
+
+
+        // employee.map((employee) => employee.name += ".")
+        // console.log(employee)
+
+        // let sortedemployee = employee.sort((a,b)=> b.age - a.age)
+
+        // console.log(sortedemployee);
+
+        //   let totalAge = employee.reduce(function(total,employee){
+        //      return total + employee.age;
+        //    },0);
+
+        // let totalAge = employee.reduce((total,employee) => total + employee.age,0);
+        // console.log(`Total Age : ${totalAge}`);
+
+
+            
+    </script>
+</body>
