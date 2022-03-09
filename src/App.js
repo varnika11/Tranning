@@ -1,27 +1,66 @@
-import React, { useState } from 'react'
-import Todos from './compoents/Todos';
-function App() {
- const[todos,setTodos] = useState([
-     {id:1,text:"Buy pens",status:true},
-     {id:2,text:"Buy scale",status:false},
-     {id:3,text:"Buy pencil",status:false},
-     {id:4,text:"Buy eraser",status:true},
-     {id:5,text:"Buy colorpencils",status:false},
- ]);
-    const toggleTodo =(e) =>{
-        console.log(e)
-        setTodos(
-            todos.map((todo)=> todo.id==e.id ? {...todo,status:!e.status} : todo
-     )
-     )
-    };
-   
+import React, { useEffect, useState } from "react";
+import Questions from "./components/Questions";
 
-  return (
-    <div>
-        <h1>Items to buy</h1>
-      <Todos list={todos} onToggle={toggleTodo}/>
-    </div>
+
+const API_URL = 'https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple';
+
+
+function App()  {
+  const[questions,setQuestions] =useState([]);
+  const[currentIndex,setCurretIndex] = useState(0);
+  const[score,setScore]= useState(0);
+  const[showAnswers,setShowAnswers]= useState(false);
+
+
+ useEffect(()=>{
+   fetch(API_URL)
+   .then(res => res.json())
+   .then(data =>{
+      const questions = data.results.map((question) =>({
+        ...question,answer:[question.correct_answer, ...question.incorrect_answers].sort(()=>Math.random() - 0.5)
+      }))
+      setQuestions(questions)
+
+   });
+ },[]);
+
+   const handleAnswer =(answer) => {
+     if(!showAnswers){
+     if(answer === questions[currentIndex].
+      correct_answer){
+        setScore(score +1);
+
+      }
+     }
+       setShowAnswers(true);
+       setTimeout(() => {
+
+        setShowAnswers(false)
+        setCurretIndex(currentIndex+1)
+
+       }, 1000)
+
+
+   };
+
+
+
+ return questions.length > 0 ? (
+<div className='container '>
+  {currentIndex >= questions.length ? (
+    <h1 className='text-3xl text-white font-bold'> Game ended! Your score is {score}.
+    </h1>
+  ):(
+
+    <Questions
+     data={questions[currentIndex]}
+     showAnswers={showAnswers}
+     handleAnswer={handleAnswer}/>
+  )}
+       </div>
+  ):(
+    <h2 className='text-2xl text-white
+    font-bold'>Loading...</h2>
   );
 }
 
